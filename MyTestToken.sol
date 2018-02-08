@@ -125,8 +125,8 @@ contract Crowdsale is Ownable {
         require(token.balanceOf(msg.sender) > 0);
         uint value = token.balanceOf(msg.sender).mul(bonusPercent).div(100);
         token.transfer(msg.sender, value);
-        payDataBonuses[msg.sender] = startPayPeriodBonuses + periodBonuses * 1 weeks;
-        Paybonuses(msg.sender, value, startPayPeriodBonuses + periodBonuses * 1 weeks);
+        payDataBonuses[msg.sender] = payDataBonuses[msg.sender] + periodBonuses * 1 weeks;
+        Paybonuses(msg.sender, value, payDataBonuses[msg.sender] + periodBonuses * 1 weeks);
     }
 
     function changeMonthForBonus() public onlyOwner {
